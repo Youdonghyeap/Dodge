@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour // 이동에 사용할 리지드바디 컴포넌트
 {
-public Rigidbody playerRigidbody; // 이동에 사용할 리지드바디 컴포넌트
-public float speed = 8f; // 이동 속도 
+    private Rigidbody playerRigidbody; // 이동에 사용할 리지드바디 컴포넌트
+    public float speed = 8f; // 이동 속도 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,25 +17,21 @@ public float speed = 8f; // 이동 속도
     // Update is called once per frame
     void Update()
     {
-        float moveX = 0f;
-        float moveZ = 0f;
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow)) // 위쪽 화살표 키가 눌렸을 때
         {
-            moveZ += 1f;
+            playerRigidbody.AddForce(0f, 0f, speed);
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow)) // 아래쪽 화살표 키가 눌렸을 때
         {
-            moveZ -= 1f;
+            playerRigidbody.AddForce(0f, 0f, -speed);
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow)) // 왼쪽 화살표 키가 눌렸을 때
         {
-            moveX -= 1f;
+            playerRigidbody.AddForce(-speed, 0f, 0f);
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow)) // 오른쪽 화살표 키가 눌렸을 때
         {
-            moveX += 1f;
+            playerRigidbody.AddForce(speed, 0f, 0f);
         }
-        Vector3 move = new Vector3(moveX, 0f, moveZ).normalized * speed;
-        playerRigidbody.linearVelocity = new Vector3(move.x, playerRigidbody.linearVelocity.y, move.z);
     }
 }
