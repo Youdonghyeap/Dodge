@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour // 이동에 사용할 리지드바디 컴포넌트
 {
-public Rigidbody playerRigidbody; // 이동에 사용할 리지드바디 컴포넌트
-public float speed = 8f; // 이동 속도 
-
+    public Rigidbody playerRigidbody; // 이동에 사용할 리지드바디 컴포넌트
+    public float speed = 8f; // 이동 속도
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // 게임 오브젝트에서 Rigidbody 컴포넌트를 찾아 playerRigidbody에 할당
         playerRigidbody = GetComponent<Rigidbody>();
+        // 게임 시작 시간 기록
     }
 
     // Update is called once per frame
@@ -48,5 +48,12 @@ public float speed = 8f; // 이동 속도
         // {
         //     playerRigidbody.AddForce(speed, 0f, 0f);
         // }
+    }
+
+    public void Die()
+    {
+        gameObject.SetActive(false); // 플레이어 오브젝트를 비활성화
+        GameManager gameManager = FindFirstObjectByType<GameManager>();
+        gameManager.EndGame();
     }
 }
