@@ -17,25 +17,36 @@ public float speed = 8f; // 이동 속도
     // Update is called once per frame
     void Update()
     {
-        float moveX = 0f;
-        float moveZ = 0f;
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            moveZ += 1f;
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            moveZ -= 1f;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            moveX -= 1f;
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            moveX += 1f;
-        }
-        Vector3 move = new Vector3(moveX, 0f, moveZ).normalized * speed;
-        playerRigidbody.linearVelocity = new Vector3(move.x, playerRigidbody.linearVelocity.y, move.z);
+        // 수평과 수직 축 입력 값을 감지
+        float xInput = Input.GetAxis("Horizontal"); // 좌우 입력
+        Debug.Log("xInput: " + xInput); // 디버그 로그로 xInput 값 출력
+        float zInput = Input.GetAxis("Vertical"); // 상하 입력
+        Debug.Log("zInput: " + zInput); // 디버그 로그로 zInput 값 출력
+
+        // 실제 이동 속도를 입력 값과 이동 속력을 통해 결정
+        float xSpeed = xInput * speed; // x축 이동 속도
+        float zSpeed = zInput * speed; // z축 이동 속도
+
+        // Vector3 속도를 (xSpeed, 0, zSpeed)로 생성
+        Vector3 newVelocity = new Vector3(xSpeed, 0f, zSpeed);
+        // 리지드바디의 속도에 newVelocity를 할당
+        playerRigidbody.linearVelocity = newVelocity;
+
+        // if (Input.GetKey(KeyCode.UpArrow)) // 위쪽 화살표 키가 눌렸을 때
+        // {
+        //     playerRigidbody.AddForce(0f, 0f, speed);
+        // }
+        // if (Input.GetKey(KeyCode.DownArrow)) // 아래쪽 화살표 키가 눌렸을 때
+        // {
+        //     playerRigidbody.AddForce(0f, 0f, -speed);
+        // }
+        // if (Input.GetKey(KeyCode.LeftArrow)) // 왼쪽 화살표 키가 눌렸을 때
+        // {
+        //     playerRigidbody.AddForce(-speed, 0f, 0f);
+        // }
+        // if (Input.GetKey(KeyCode.RightArrow)) // 오른쪽 화살표 키가 눌렸을 때
+        // {
+        //     playerRigidbody.AddForce(speed, 0f, 0f);
+        // }
     }
 }
