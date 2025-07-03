@@ -21,6 +21,12 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // 벽에 부딪히면 총알 오브젝트를 파괴
+        if (other.tag == "Wall")
+        {
+            Destroy(gameObject);
+            return;
+        }
         // 충돌한 상대방 오브젝트가 Player 태그를 가진 경우
         if (other.tag == "Player")
         {

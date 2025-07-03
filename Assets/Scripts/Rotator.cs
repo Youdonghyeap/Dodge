@@ -5,9 +5,30 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     public float rotationSpeed = 60f; // 회전 속도
-    // Update is called once per frame
+    private bool isClockwise = true; // 시계 방향 여부
+    private float changeInterval; // 방향이 바뀌는 간격
+    private float timeSinceChange = 0f;
+
+    void Start()
+    {
+        SetRandomInterval();
+    }
+
     void Update()
     {
-        transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);
+        timeSinceChange += Time.deltaTime;
+        if (timeSinceChange >= changeInterval)
+        {
+            isClockwise = Random.value > 0.5f;
+            SetRandomInterval();
+            timeSinceChange = 0f;
+        }
+        float direction = isClockwise ? 1f : -1f;
+        transform.Rotate(0f, rotationSpeed * direction * Time.deltaTime, 0f);
+    }
+
+    void SetRandomInterval()
+    {
+        changeInterval = Random.Range(1f, 3f); // 1~3초 사이 랜덤
     }
 }
