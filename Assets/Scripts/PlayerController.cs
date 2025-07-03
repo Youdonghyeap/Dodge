@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour // 이동에 사용할 리지드바디 컴포넌트
 {
-<<<<<<< HEAD
     public Rigidbody playerRigidbody; // 이동에 사용할 리지드바디 컴포넌트
     public float speed = 8f; // 이동 속도
-=======
-    private Rigidbody playerRigidbody; // 이동에 사용할 리지드바디 컴포넌트
-    public float speed = 8f; // 이동 속도 
-
->>>>>>> main
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,7 +17,6 @@ public class PlayerController : MonoBehaviour // 이동에 사용할 리지드�
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
         // 수평과 수직 축 입력 값을 감지
         float xInput = Input.GetAxis("Horizontal"); // 좌우 입력
         Debug.Log("xInput: " + xInput); // 디버그 로그로 xInput 값 출력
@@ -62,23 +55,5 @@ public class PlayerController : MonoBehaviour // 이동에 사용할 리지드�
         gameObject.SetActive(false); // 플레이어 오브젝트를 비활성화
         GameManager gameManager = FindFirstObjectByType<GameManager>();
         gameManager.EndGame();
-=======
-        if (Input.GetKey(KeyCode.UpArrow)) // 위쪽 화살표 키가 눌렸을 때
-        {
-            playerRigidbody.AddForce(0f, 0f, speed);
-        }
-        if (Input.GetKey(KeyCode.DownArrow)) // 아래쪽 화살표 키가 눌렸을 때
-        {
-            playerRigidbody.AddForce(0f, 0f, -speed);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow)) // 왼쪽 화살표 키가 눌렸을 때
-        {
-            playerRigidbody.AddForce(-speed, 0f, 0f);
-        }
-        if (Input.GetKey(KeyCode.RightArrow)) // 오른쪽 화살표 키가 눌렸을 때
-        {
-            playerRigidbody.AddForce(speed, 0f, 0f);
-        }
->>>>>>> main
     }
 }
